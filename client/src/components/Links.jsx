@@ -17,7 +17,7 @@ const Item = styled.div.attrs({
 const Links = () => (
   <>
     <Link to="/" className="navbar-brand">
-      My first MERN Application
+      My MERN Application
     </Link>
     <Collapse>
       <List>
