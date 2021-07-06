@@ -4,6 +4,8 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 
 import styled from "styled-components";
+import DeleteMovie from "../components/DeleteMovie";
+import UpdateMovie from "../components/UpdateMovie";
 
 const Wrapper = styled.div`
   padding: 0 40px 40px 40px;
@@ -33,7 +35,7 @@ const MoviesList = () => {
     }
   }, []);
 
-  console.log(movies);
+  console.log(show);
 
   const columns = [
     {
@@ -55,6 +57,28 @@ const MoviesList = () => {
       Header: "Time",
       accessor: "time",
       Cell: props => <span>{props.value.join(" / ")}</span>
+    },
+    {
+      Header: "",
+      accessor: "",
+      Cell: function(props) {
+        return (
+          <span>
+            <DeleteMovie id={props.original._id} />
+          </span>
+        );
+      }
+    },
+    {
+      Header: "",
+      accessor: "",
+      Cell: function(props) {
+        return (
+          <span>
+            <UpdateMovie id={props.original._id} />
+          </span>
+        );
+      }
     }
   ];
 
