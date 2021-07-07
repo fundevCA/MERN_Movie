@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, memo } from "react";
 import api from "../api";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(true);
+  let show = true;
 
   useEffect(() => {
     async function fetchMovies() {
@@ -24,18 +24,8 @@ const MoviesList = () => {
         setLoading(false);
       });
     }
-
     fetchMovies();
-
-    if (!movies.length) {
-      setShow(false);
-      return <></>;
-    } else {
-      setShow(true);
-    }
   }, []);
-
-  console.log(show);
 
   const columns = [
     {
@@ -81,7 +71,9 @@ const MoviesList = () => {
       }
     }
   ];
-
+  if (!movies.length) {
+    show = false;
+  }
   return (
     <Wrapper>
       {show && (
@@ -98,4 +90,4 @@ const MoviesList = () => {
   );
 };
 
-export default MoviesList;
+export default memo(MoviesList);
